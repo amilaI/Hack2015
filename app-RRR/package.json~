@@ -1,0 +1,16 @@
+{
+  "name": "MLPEPconfigConsole",
+  "version": "1.0.0",
+  "description": "EP Configuration and Migration API Console for Pearson MLP Newgateway",
+  "main": "app.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Amila Iddamalgoda (amila.iddamalgoda@pearson.com)",
+  "license": "ISC",
+  "dependencies":{
+  	 "express":"~4.13.1",
+	 "request": "~2.27.0"
+  }
+}

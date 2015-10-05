@@ -1,0 +1,38 @@
+description "Node.js server for mlpui ui"
+
+start on startup
+start on [2345]
+stop on [06]
+
+env NODE_ENV=dev
+env CONFIG=ec2-config.js
+
+pre-start script
+  touch /var/log/mlpui.log
+  chown appuser:appuser /var/log/mlpui.log
+  chmod 660 /var/log/mlpui.log
+  touch /var/log/mlpui-out.log
+  chown appuser:appuser /var/log/mlpui-out.log
+  chmod 660 /var/log/mlpui-out.log
+end script
+
+respawn
+respawn limit 50 5
+
+script
+  ulimit -n 99999
+  if [ -f /etc/app.env ]; then
+    . /etc/app.env
+  fi
+  if [ -f /etc/default/mlpui ]; then
+    . /etc/default/mlpui
+  fi
+  exec start-stop-daemon --start -c appuser --exec "/usr/bin/node" -- "/home/appuser/mlpui/app.js" >> /var/log/mlpui-out.log 2>&1
+end script
+
+post-stop script
+  exec sleep 4
+  #Kill any defunct zombie processes that might exist
+  ps -eo state,ppid | awk '$1=="Z"{cmd="kill -9 "$2;system(cmd) }'
+  exec sleep 1
+end script

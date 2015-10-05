@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
+  <title>RRR Management System</title>
+
+  <style type="text/css">
+
+    .releaseDiv:hover{
+      background-color: rgba(0, 150, 136, 0.6);
+      border-radius: 15px;
+      -o-transition:color .2s ease-out, background .3s ease-in;
+      -ms-transition:color .2s ease-out, background .3s ease-in;
+      -moz-transition:color .2s ease-out, background .3s ease-in;
+      -webkit-transition:color .2s ease-out, background .3s ease-in;
+      /* ...and now override with proper CSS property */
+      transition:color .2s ease-out, background .3s ease-in;
+      cursor: pointer;
+    }
+    .card{
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="row">
+    <nav>
+      <div class="nav-wrapper blue-grey darken-4">
+        <a href="#" class="brand-logo">&nbsp;&nbsp;Pearson Release Readiness Review Dashboard</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+         <li id="aproveBtn" style="margin-right: 15px;" ><a  class="waves-effect waves-light btn tooltipped" style="width: 50px; height: 50px; border-radius: 80px; padding: 0px;" data-position="bottom" data-delay="50" data-tooltip="Approve" href="#"><img id="" src="img/ok.png" style="width: 50px; height: 50px;"></a></li>
+         <li id="appConBtn" style="margin-right: 15px;" ><a  class="waves-effect waves-light btn modal-trigger tooltipped orange" href="#approveWithConditionsModal" style="width: 50px; height: 50px; border-radius: 80px; padding: 0px;" data-position="bottom" data-delay="50" data-tooltip="Approve with conditions" href="#"><img id="" src="img/ok-condition.png" style="width: 50px; height: 50px;"></a></li>
+         <li id="rejecTBtn" style="margin-right: 15px;" ><a  class="waves-effect waves-light btn modal-trigger tooltipped red" href="#rejectthisReleaseModal" style="width: 50px; height: 50px; border-radius: 80px; padding: 0px;" data-position="bottom" data-delay="50" data-tooltip="Reject" href="#"><img id="" src="img/error.png" style="width: 50px; height: 50px;"></a></li>
+
+       </ul>
+     </div>
+   </nav>
+ </div>
+
+
+ <div class="row">
+
+  <div class="col s6 m6">
+   <div class="row">
+    <div class="col s6 m6">
+      <div class="card " style="height: 577px;">
+        <div class="card-content">
+          <span><img src="img/listview.png" style="width:40px" class="responsive-img"><h5 id="releaseNameR" style="font-weight: bold;float: left;"></h5></span>
+          <br>
+          <span style="font-weight: bold">Release Summary</span>
+          <p id="releseDiscR"></p>
+          <br>
+          <span style="font-weight: bold">Staging Release Date</span>
+          <p id="releseStgDateR"></p>
+          <br>
+          <span style="font-weight: bold">Production Release Date</span>
+          <p id="relesePrdDateR"></p>
+          <br>
+          <table class="bordered">
+            <thead>
+              <tr>
+                <th ></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <div class="input-field col s6">
+                  <select>
+                    <option value="" >Low</option>
+                    <option value="1">Medium</option>
+                    <option value="2">High</option>
+                  </select>
+                  <label style="font-weight: bold;font-size: 16px;color: teal">Risk Impact</label>
+                </div>
+                <div class="input-field col s6" >
+                  <select >
+                    <option  value="" >Low</option>
+                    <option value="1">Medium</option>
+                    <option value="2"  style="color:red"><div id="hightSelect">High</div></option>
+                  </select>
+                  <label style="font-weight: bold;font-size: 16px;color: teal">Risk Probability</label>
+                </div>
+               <!--  <th style="background-color: #388E3C">Low</th>-->
+                <th id="riskImpact" style="background-color: #FF5252;display: none">Overall Risk : High</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s6 m6">
+      <div class="card ">
+        <div class="card-content">
+          <span style="font-weight: bold">Testing &nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <hr>
+          <div class="input-field col s4">
+            <select>
+              <option value="" selected>Inprogress</option>
+              <option value="1">Done</option>
+              <option value="2">N/A</option>
+            </select>
+            <label style="font-weight: bold;font-size: 16px;color: teal">Test Strategy</label>
+          </div>
+          <div class="input-field col s4">
+            <select>
+              <option value="" >Inprogress</option>
+              <option value="1">Done</option>
+              <option value="2">N/A</option>
+            </select>
+            <label style="font-weight: bold;font-size: 16px;color: teal">Perf Testing</label>
+          </div>
+          <div class="input-field col s4">
+            <select>
+              <option value="" >Inprogress</option>
+              <option value="1">Done</option>
+              <option value="2">N/A</option>
+            </select>
+            <label style="font-weight: bold;font-size: 16px;color: teal">Perf Analysis</label>
+          </div>
+          <br><br><br><br><br><br><br>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s6 m6">
+      <div class="card " style="height: 298px;">
+        <div class="card-content">
+          <span style="font-weight: bold">Reviews &nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <hr>
+          <div class="input-field col s4">
+            <select>
+              <option value="" disabled selected>Inprogress</option>
+              <option value="1">Done</option>
+              <option value="2">N/A</option>
+            </select>
+            <label style="font-weight: bold;font-size: 16px;color: teal">Architecture</label>
+          </div>
+          <div class="input-field col s4">
+            <select>
+              <option value="" disabled selected>Inprogress</option>
+              <option value="1">Done</option>
+              <option value="2">N/A</option>
+            </select>
+            <label style="font-weight: bold;font-size: 16px;color: teal">Code</label>
+          </div>
+          <div class="input-field col s4">
+            <select>
+              <option value="" disabled selected>Inprogress</option>
+              <option value="1">Done</option>
+              <option value="2">N/A</option>
+            </select>
+            <label style="font-weight: bold;font-size: 16px;color: teal">DB</label>
+          </div>
+          <div class="input-field col s4">
+            <select>
+              <option value="" disabled selected>Inprogress</option>
+              <option value="1">Done</option>
+              <option value="2">N/A</option>
+            </select>
+            <label style="font-weight: bold;font-size: 16px;color: teal">Security</label>
+          </div>
+          <div class="input-field col s4">
+            <select>
+              <option value="" disabled selected>Inprogress</option>
+              <option value="1">Done</option>
+              <option value="2">N/A</option>
+            </select>
+            <label style="font-weight: bold;font-size: 16px;color: teal">Accesibility</label>
+          </div>
+          <br><br><br><br><br><br><br>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+
+<div class="col s6 m6">
+
+  <div class="row">
+
+    <div class="col s12 m12">
+      <div class="card">
+        <div class="card-image" style="text-align: center;">
+          <img src="img/jj.jpg" align="middle" style="width:150px;margin: 0 auto">
+          <span class="card-title" style="color:black"></span>
+        </div>
+        <div class="card-content" style="margin: 0 auto;text-align: center">
+         <!--  <table class="">
+           <thead>
+             <tr style=";font-weight: bold;font-size: 18px">
+               <th data-field="id" >Size - User story points&nbsp;&nbsp;:&nbsp;<span style="font-size: 25px">50</span></th>
+               <th data-field="id" >No Of Iterations&nbsp;&nbsp;:&nbsp;<span style="font-size: 25px">3</span></th>
+             </tr>
+
+           </thead>
+         </table> -->
+         <div id="container" style="min-width: 280px; height: 300px; margin: 0 auto;display: none"></div>
+
+         <div class="preloader-wrapper big active jiraPreloader">
+          <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div>
+<div class="row">
+
+ <div class="col s3 m3">
+  <div class="card" >
+    <div class="card-image" style="text-align: center;">
+      <img src="img/sn.jpg" align="middle" style="width:180px;margin: 0 auto">
+      <div style="text-align: left;font-size: 14px">
+        <p style="font-weight: bold">Ticket No : S123879</p>
+          <!-- <p style="font-weight: bold">Pending Tasks</p>
+          <p style="">Task No 1</p>
+          <p style="">Task No 2</p>
+          <p style="">Task No 3</p> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col s3 m3">
+    <div class="card" style="">
+      <div class="card-image" style="text-align: center;">
+        <img src="img/jen.jpeg" align="middle" class="responsive-img" style="width:200px;">
+
+      </div>
+      <div class="card-content" >
+        <table class="bordered">
+          <tbody style="font-size: 12px">
+            <tr>
+              <td style="font-weight: bold;">No of Automated Test cases</td>
+              <td id="totalCountJEN" class="jenText"></td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold;">Passed count</td>
+              <td id="passedCountJEN" class="jenText"></td>
+
+            </tr>
+            <tr>
+              <td style="font-weight: bold;">Failed count</td>
+              <td id="failedCountJEN" class="jenText"></td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col s3 m3">
+    <div class="card" style="height: 315px;">
+      <div class="card-image" style="text-align: center;">
+        <!-- <img src="img/fisheye1.png" align="middle" style="width:100px;">
+        <p style="font-weight: bold;font-size: 14px;">Code Coverage&nbsp;&nbsp;:&nbsp;<span style="font-size: 25px">90</span>%</p> -->
+        <img src="img/sonar.png" align="middle" style="width:100px;">
+        <p style="font-weight: bold;font-size: 12px;margin-top: 45px;">Unit Test Coverage&nbsp;&nbsp;:&nbsp;<span style="font-size: 25px">36.1%</span>%</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col s3 m3">
+    <div class="card" style="height: 315px;">
+      <div class="card-image" style="text-align: center;">
+        <img src="img/testlink.jpeg" align="middle" class="responsive-img" style="width:150px;">
+
+      </div>
+      <div class="card-content">
+        <table class="bordered">
+          <tbody style="font-size: 12px">
+            <tr>
+              <td style="font-weight: bold;">No of Passed Test cases</td>
+              <td>12</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold;">No of Failed Test cases</td>
+              <td>2</td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+
+</div>
+
+</div>
+
+
+
+
+<div class="row">
+
+
+</div>
+
+<div class="row">
+
+ <!-- <div class="col s3 m3">
+  <div class="card" style="height: 450px;">
+    <div class="card-image" style="text-align: center;">
+      <img src="img/sn.jpg" align="middle" style="width:200px;margin: 0 auto">
+      <div style="text-align: left;">
+        <p style="font-weight: bold">Ticket No : S123879</p>
+        <p style="font-weight: bold">Pending Tasks</p>
+        <p style="">Task No 1</p>
+        <p style="">Task No 2</p>
+        <p style="">Task No 3</p>
+        <p style="">Task No 4</p>
+        <p style="">Task No 5</p>
+        <p style="">Task No 6</p>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- <div class="col s3 m3">
+  <div class="card" style="height: 450px;">
+    <div class="card-image" style="text-align: center;">
+      <img src="img/testlink.jpeg" align="middle" class="responsive-img" style="width:200px;">
+
+    </div>
+    <div class="card-content">
+      <table class="bordered">
+        <thead>
+          <tr>
+            <th data-field="id" style=";font-weight: bold;">Testing Type</th>
+            <th>Dev/QE (VCD)</th>
+            <th>Staging</th>
+            <th>PPE</th>
+            <th>01's</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-weight: bold;">Functional</td>
+            <td>100</td>
+            <td>100</td>
+            <td>N/A</td>
+            <td>100</td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;">Regression</td>
+            <td>100</td>
+            <td>0%</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;">Integration</td>
+            <td>100</td>
+            <td>0%</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td style="font-weight: bold;">BVT</td>
+            <td></td>
+            <td>0%</td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div> -->
+
+</div>
+
+<div class="row">
+
+
+</div>
+<!-- <div class="row">
+  <div class="col s6 m6">
+    <div class="card ">
+      <div class="card-content">
+        <span style="font-weight: bold">Dev Ops Readiness &nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <hr>
+        <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />
+        <label for="filled-in-box">Continuos Integration (CI) is set up</label>
+        &nbsp;&nbsp;
+        <input type="checkbox" class="filled-in" id="filled-in-box2" checked="checked" />
+        <label for="filled-in-box2">Build automated</label>
+        &nbsp;&nbsp;
+        <input type="checkbox" class="filled-in" id="filled-in-box3" checked="checked" />
+        <label for="filled-in-box3">Automated tests are in CI</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s3 m3">
+  </div>
+  <div class="col s3 m3">
+    <div class="card ">
+      <div class="card-content">
+        <span style="font-weight: bold">Action Items</span>
+        <div class="input-field">
+          <textarea id="textarea1" class="materialize-textarea"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col s3 m3">
+    <div class="card ">
+      <div class="card-content">
+        <span style="font-weight: bold">Improvements</span>
+        <div class="input-field">
+          <textarea id="textarea1" class="materialize-textarea"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col s3 m3">
+    <div class="card ">
+      <div class="card-content">
+        <span style="font-weight: bold">Dependencies</span>
+        <div class="input-field">
+          <textarea id="textarea1" class="materialize-textarea"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+
+
+
+<!-- Modal Structure -->
+<div id="approveWithConditionsModal" class="modal">
+  <div class="modal-content">
+    <h4>Approve this release with conditions</h4>
+    <!-- <p>A bunch of text</p> -->
+    <div class="row">
+      <div class="col s6 m6">
+        <div class="card ">
+          <div class="card-content">
+            <span style="font-weight: bold">Action Items</span>
+            <div class="input-field">
+              <textarea id="textarea1" class="materialize-textarea"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col s6 m6">
+        <div class="card ">
+          <div class="card-content">
+            <span style="font-weight: bold">Dependencies</span>
+            <div class="input-field">
+              <textarea id="textarea1" class="materialize-textarea"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" id="approveWithConditionsBtn" class=" modal-action modal-close waves-effect waves-light btn">Approve with Conditions</a>
+  </div>
+</div>
+
+
+
+<!--rejectthisReleaseModal Modal Structure -->
+<div id="rejectthisReleaseModal" class="modal">
+  <div class="modal-content">
+    <h4>Reject this release with conditions</h4>
+    <!-- <p>A bunch of text</p> -->
+    <div class="row">
+      <div class="col s6 m6 offset-s3 offset-m3">
+        <div class="card ">
+          <div class="card-content">
+            <span style="font-weight: bold">Reasons</span>
+            <div class="input-field">
+              <textarea id="rejectReasonContent" class="materialize-textarea"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" id="rejectBtn" class=" modal-action modal-close waves-effect waves-light btn">Approve with Conditions</a>
+  </div>
+</div>
+
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript" src="js/release.js"></script>
+<script type="text/javascript" src="js/jquery.url.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    var input1 =$('.datepicker').pickadate({
+                selectMonths: true, // Creates a dropdown to control month
+                selectYears: 15 // Creates a dropdown of 15 years to control year
+              });
+
+
+    $('#displayDate').html( getToday());
+    $('#displayPragram').html(getFirstProgram());
+
+    $("#datepicker").change(function() {
+      var date = $(this).val();
+      $('#displayDate').html(date);
+    });
+
+
+    $("#dropdown1 li a").click( function() {
+      var yourText = $(this).text();
+      $('#displayPragram').html(yourText);
+    });
+
+
+    $('#datecard').fadeIn( "slow", function() {
+      $('#addReleaseBtn').fadeIn( "slow", function() {
+      });
+    });
+    $('[data-toggle="tooltip"]').tooltip();
+
+$( "#hightSelect" ).on( "click", function() {
+
+$('#riskImpact').show();
+
+});
+
+  });
+
+  function getToday(){
+
+    var monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+    ];
+
+    var today = new Date();
+    var dd = today.getDate();
+    //var mm = today.getMonth()+1; //January is 0!
+    var mm = monthNames[today.getMonth()];
+    var yyyy = today.getFullYear();
+
+    if(dd<10) {
+      dd='0'+dd
+    }
+
+   /* if(mm<10) {
+        mm='0'+mm
+      }*/
+
+      today = dd+' '+mm+', '+yyyy;
+      return today;
+    }
+
+    function getFirstProgram(){
+      var program = $("#dropdown1 li:first ").text();
+      return program;
+    }
+    $(document).ready(function() {
+      $('select').material_select();
+      $('.tooltipped').tooltip({delay: 50});
+      $('.modal-trigger').leanModal();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
+  <title>RRR Management System</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <style type="text/css">
+
+    .releaseDiv:hover{
+      background-color: rgba(0, 150, 136, 0.6);
+      border-radius: 15px;
+      -o-transition:color .2s ease-out, background .3s ease-in;
+      -ms-transition:color .2s ease-out, background .3s ease-in;
+      -moz-transition:color .2s ease-out, background .3s ease-in;
+      -webkit-transition:color .2s ease-out, background .3s ease-in;
+      /* ...and now override with proper CSS property */
+      transition:color .2s ease-out, background .3s ease-in;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="row">
+    <nav>
+      <div class="nav-wrapper blue-grey darken-4">
+        <a href="#" class="brand-logo">&nbsp;&nbsp;Pearson Release Readiness Review Dashboard</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li style="margin-right: 15px;" ><a class="waves-effect waves-light btn modal-trigger tooltipped" style="width: 50px; height: 50px; border-radius: 80px; padding: 0px;" data-position="bottom" data-delay="50" data-tooltip="Create A New Release" href="#modal1"><img id="addReleaseBtn" src="img/add.png" style="width: 50px; height: 50px;"></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <div class="row">
+
+    <div class="col s4 m4 offset-s1 offset-m1" id="datecard" style="display: none">
+      <div class="card teal" >
+        <div class="card-content white-text" align="center">
+          <div>
+            <span id="displayDate" style="font-size: 20px"></span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <a class="col s12 m12 waves-effect waves-light btn-large datepicker indigo darken-4 datePickerBtn" id="datepicker"><i class="material-icons left"></i>You can pick a date from here</a>
+      </div>
+    </div>
+
+    <div class="col s4 m4" id="program">
+      <div class="card teal" >
+        <div class="card-content white-text" align="center">
+          <div>
+            <span id="displayPragram" style="font-size: 20px"></span>
+          </div>
+        </div>
+      </div>
+      <a class='dropdown-button col s12 m12 waves-effect waves-light btn-large  deep-purple darken-3' href='#' data-activates='dropdown1'>Select a Program</a>
+      <ul id='dropdown1' class='dropdown-content'>
+        <li><a href="#!">Home Base - CG (SL)</a></li>
+        <li><a href="#!">Courseware and Program Solutions (US/IND/SL)</a></li>
+        <li><a href="#!">Custom & Enterprise Solutions - CG (SL/US/AUS)</a></li>
+        <li><a href="#!">Custom & Enterprise Solutions (US/IN)</a></li>
+        <li><a href="#!">Educational Delivery Solutions (SL)</a></li>
+        <li><a href="#!">Interactive Learning (US/IN)</a></li>
+        <li><a href="#!">Adopt, Customize, & Productize (US/SL/IN)</a></li>
+
+      </ul>
+    </div>
+
+    <div class="col s3 m3" id="program">
+
+    </div>
+
+    <div class="col s2 m2">
+              <!-- <a class="waves-effect waves-light btn modal-trigger" style="width: 128px; height: 128px; border-radius: 80px; padding: 0px;" href="#modal1"><img id="addReleaseBtn" src="img/add.png"></a>
+            --> </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col s10 m10 offset-s1 offset-m1">
+              <table class="bordered responsive-table">
+                <thead>
+                  <tr style="font-size: 18px;font-weight: bold;">
+                    <th data-field="id"></th>
+                    <th data-field="id">Team</th>
+                    <th data-field="name">Release Name</th>
+                    <th data-field="price">Staging Release Date</th>
+                    <th data-field="price">Production Release Date</th>
+                    <th data-field="price">Status Approval</th>
+                  </tr>
+                </thead>
+
+                <tbody id="releaseTable" style="font-size: 16px;">
+
+                  <tr class="releaseDiv">
+                    <td><img src="img/listview.png" style="width:50px" class="responsive-img"></td>
+                    <td>Team Ruby</td>
+                    <td>Inbound SSO Release</td>
+                    <td>3 April,2015</td>
+                    <td>14 April,2015</td>
+                    <td><img src="img/error.png" style="width:50px" class="responsive-img"></td>
+                  </tr>
+                  <tr class="releaseDiv">
+                    <td><img src="img/listview.png" style="width:50px" class="responsive-img"></td>
+                    <td>Team Neuro</td>
+                    <td>Reclaim sonic db disk size Test</td>
+                    <td>3 May,2015</td>
+                    <td>15 May,2015</td>
+                    <td><img src="img/ok.png" style="width:50px" class="responsive-img"></td>
+                  </tr>
+
+                  <tr class="releaseDiv">
+                    <td><img src="img/listview.png" style="width:50px" class="responsive-img"></td>
+                    <td>Team Ivory</td>
+                    <td>CCWS Release 2.0</td>
+                    <td>12 June,2015</td>
+                    <td>24 June,2015</td>
+                    <td><img src="img/ok-condition.png" style="width:50px" class="responsive-img"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+
+          <!-- Modal Structure -->
+          <div id="modal1" class="modal">
+            <div class="modal-content">
+              <h4>Add a Release</h4>
+              <div class="row">
+                <form class="col s12" id="createARelaeseForm" name="createARelaeseForm">
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <i class="material-icons prefix">account_circle</i>
+                      <input id="projectKEY_createForm" type="text" class="validate" required>
+                      <label for="icon_prefix">Project KEY/Name</label>
+                      <a id="getReleasesForProject" style="margin-left: 45px" class="waves-effect waves-light btn  light-green">Get Releases</a>
+                    </div>
+
+
+                    <div class="input-field col s6">
+                      <div id="relaseDropDownAppender">
+                      </div>
+                      <label style="margin-top: -30px;">Release Name</label>
+                    </div>
+
+                    <div class="progress col s12" id="progressBar1" style="display: none">
+                      <div class="indeterminate"></div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <select id="teamName_createForm">
+                        <option value="1">Team Tangerine</option>
+                        <option value="2">Team Hydra</option>
+                        <option value="3">Team Ruby</option>
+                        <option value="3">Team Ivory</option>
+                        <option value="3">Team Everest</option>
+                        <option value="3">Team K2</option>
+                        <option value="3">Team Neuro</option>
+                        <option value="3">Team Pandora</option>
+                        <option value="3">Team Emerald</option>
+                        <option value="3">Team SuperNova</option>
+                        <option value="3">Team Randenigala</option>
+                        <option value="3">Team Laxapana</option>
+                      </select>
+                      <label>Team Name</label>
+                    </div>
+
+                    <div class="input-field col s6">
+                      <select id="programName_createForm">
+                        <option value="4">Home Base - CG (SL)</option>
+                        <option value="">Courseware and Program Solutions (US/IND/SL)</option>
+                        <option value="1">Custom & Enterprise Solutions - CG (SL/US/AUS)</option>
+                        <option value="2">Custom & Enterprise Solutions (US/IN)</option>
+                        <option value="3">Educational Delivery Solutions (SL)</option>
+                        <option value="5">Interactive Learning (US/IN)</option>
+                        <option value="5">Adopt, Customize, & Productize (US/SL/IN)</option>
+                      </select>
+                      <label>Program Name</label>
+                    </div>
+
+
+
+                    <div class="input-field col s12">
+                      <i class="material-icons prefix">chat</i>
+                      <input id="releasedescription_createForm" type="tel" class="validate">
+                      <label  for="icon_telephone">Release Description</label>
+                    </div>
+
+                    <div class="input-field col s6">
+                      <i class="material-icons prefix">subtitles</i>
+                      <input id="stgDate_createForm" type="date" class="datepicker">
+                      <label style="margin-top: -30px;" for="icon_telephone">Statging Date</label>
+                    </div>
+
+                    <div class="input-field col s6">
+                      <i class="material-icons prefix">subtitles</i>
+                      <input  id="prdDate_createForm" type="date" class="datepicker">
+                      <label style="margin-top: -30px;" for="icon_telephone">Production Date</label>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+              <div class="progress col s12  light-green " style="display: none" id="createReleaseNowProgress">
+                <div class="indeterminate"></div>
+              </div>
+              <div class="modal-footer" style="text-align: center">
+                <button type="submit" id="createNewBtn" class="modal-action waves-effect waves-green btn-flat teal">Create Release</button>
+              </div>
+            </form>
+          </div>
+
+          <!--Import jQuery before materialize.js-->
+          <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+          <script type="text/javascript" src="js/materialize.min.js"></script>
+
+          <script type="text/javascript">
+            $(document).ready(function() {
+              var input1 =$('.datepicker').pickadate({
+                selectMonths: true, // Creates a dropdown to control month
+                selectYears: 15 // Creates a dropdown of 15 years to control year
+              });
+
+
+              $('#displayDate').html( getToday());
+              $('#displayPragram').html(getFirstProgram());
+
+              $("#datepicker").change(function() {
+                var date = $(this).val();
+                $('#displayDate').html(date);
+              });
+
+
+              $("#dropdown1 li a").click( function() {
+                var yourText = $(this).text();
+                $('#displayPragram').html(yourText);
+              });
+
+
+              $('#datecard').fadeIn( "slow", function() {
+                $('#addReleaseBtn').fadeIn( "slow", function() {
+                });
+              });
+              $('[data-toggle="tooltip"]').tooltip();
+              $('.modal-trigger').leanModal();
+              $('select').material_select();
+              $('.tooltipped').tooltip({delay: 50});
+
+
+    $('#createNewForm').on('submit', function(e) { //use on if jQuery 1.7+
+
+        e.preventDefault();  //prevent form from submitting/refreshing
+        $('#newRecentRelease').show();
+      });
+
+
+
+  });
+
+function getToday(){
+
+  var monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+  ];
+
+  var today = new Date();
+  var dd = today.getDate();
+    //var mm = today.getMonth()+1; //January is 0!
+    var mm = monthNames[today.getMonth()];
+    var yyyy = today.getFullYear();
+
+    if(dd<10) {
+      dd='0'+dd
+    }
+
+   /* if(mm<10) {
+        mm='0'+mm
+      }*/
+
+      today = dd+' '+mm+', '+yyyy;
+      return today;
+    }
+
+    function getFirstProgram(){
+      var program = $("#dropdown1 li:first ").text();
+      return program;
+    }
+
+   /* $( ".releaseDiv" ).on( "click", function() {
+
+    });*/
+
+
+  </script>
+  <script type="text/javascript" src="js/home.js"></script>
+</body>
+</html>
